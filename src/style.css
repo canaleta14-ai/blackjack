@@ -1,0 +1,101 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2f4f30;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.titulo {
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+    font-size: clamp(20px, 5vw, 25px);
+}
+
+.titulo h1 {
+    margin: 0;
+}
+
+.carta {
+    position: relative;
+    width: clamp(80px, 20vw, 150px);
+    height: auto;
+    left: 0;
+    margin-left: clamp(-40px, -10vw, -75px);
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.carta:first-child {
+    margin-left: 0;
+}
+
+#cartas-jugador1,
+#cartas-jugador2 {
+    height: auto;
+    min-height: 120px;
+    margin-top: 10px;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 576px) {
+    .titulo {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        margin: 5px 2px;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    #botones {
+        margin-bottom: 10px;
+    }
+
+    .row {
+        margin-left: -0.25rem;
+        margin-right: -0.25rem;
+    }
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 768px) {
+    .titulo {
+        padding: 15px;
+    }
+
+    .carta {
+        width: 100px;
+        margin-left: -50px;
+    }
+
+    .carta:first-child {
+        margin-left: 0;
+    }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+    .carta {
+        width: 150px;
+        margin-left: -75px;
+    }
+
+    .carta:first-child {
+        margin-left: 0;
+    }
+}
