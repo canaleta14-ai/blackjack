@@ -306,69 +306,131 @@ body {
     text-align: center;
 }
 
-.cara-triste {
-    font-size: clamp(100px, 20vw, 200px);
-    animation: caraTristeEntrada 1s ease-out;
-    filter: grayscale(50%);
+.duende-container {
+    position: relative;
+    display: inline-block;
 }
 
-@keyframes caraTristeEntrada {
+.duende-enojado {
+    font-size: clamp(120px, 24vw, 220px);
+    animation: duendeEntrada 1s ease-out, enrojecer 2s ease-in-out 1s infinite, temblor 0.15s linear 1s infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+    display: inline-block;
+}
+
+@keyframes duendeEntrada {
     0% {
-        transform: scale(0);
+        transform: scale(0) rotate(-180deg);
         opacity: 0;
     }
     60% {
-        transform: scale(1.1);
+        transform: scale(1.15) rotate(10deg);
     }
     100% {
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
         opacity: 1;
     }
 }
 
-.mensaje-derrota {
-    margin-top: 20px;
-    font-size: clamp(30px, 6vw, 50px);
-    font-weight: bold;
-    color: #8B9DC3;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    animation: slideIn 0.5s ease-out 0.5s backwards;
+@keyframes enrojecer {
+    0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5)) hue-rotate(0deg);
+    }
+    50% {
+        filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.9)) hue-rotate(0deg) brightness(1.3);
+    }
 }
 
-.lluvia-container {
+@keyframes temblor {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-2px, -1px) rotate(-1deg); }
+    50% { transform: translate(2px, 1px) rotate(1deg); }
+    75% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+}
+
+.orejas-container {
     position: absolute;
-    top: -50px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 300px;
-    height: 400px;
+    width: clamp(200px, 40vw, 350px);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
 }
 
-.gota {
+.oreja {
+    font-size: clamp(40px, 8vw, 70px);
+    animation: orejasPunta 0.5s ease-out 0.8s backwards, orejaTemblor 0.2s linear 1.3s infinite;
+}
+
+.oreja-izq {
+    transform: rotate(45deg) scaleX(-1);
+}
+
+.oreja-der {
+    transform: rotate(-45deg);
+}
+
+@keyframes orejasPunta {
+    0% {
+        transform: rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes orejaTemblor {
+    0%, 100% { transform: rotate(45deg) scaleY(1); }
+    50% { transform: rotate(45deg) scaleY(1.1); }
+}
+
+.humo {
     position: absolute;
-    font-size: clamp(20px, 4vw, 30px);
-    animation: caer 2s linear infinite;
-    opacity: 0.7;
+    top: 25%;
+    font-size: clamp(30px, 6vw, 50px);
+    animation: humoSalir 1.5s ease-out 1.2s infinite;
+    opacity: 0;
 }
 
-.gota:nth-child(1) {
-    left: 20%;
-    animation-delay: 0s;
+.humo-izq {
+    left: -15%;
+    animation-delay: 1.2s;
 }
 
-.gota:nth-child(2) {
-    left: 40%;
-    animation-delay: 0.5s;
+.humo-der {
+    right: -15%;
+    animation-delay: 1.4s;
 }
 
-.gota:nth-child(3) {
-    left: 60%;
-    animation-delay: 1s;
+@keyframes humoSalir {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-80px) translateX(20px) scale(1.5);
+        opacity: 0;
+    }
 }
 
-.gota:nth-child(4) {
-    left: 80%;
-    animation-delay: 1.5s;
+.mensaje-derrota {
+    margin-top: 40px;
+    font-size: clamp(30px, 6vw, 50px);
+    font-weight: bold;
+    color: #FF6B6B;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    animation: slideIn 0.5s ease-out 0.5s backwards, parpadeo 1s ease-in-out 1.5s infinite;
+}
+
+@keyframes parpadeo {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
 }
 
 @keyframes caer {
