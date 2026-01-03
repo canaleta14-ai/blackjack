@@ -45,12 +45,30 @@
         </div>
     </div>
 
+    <!-- Animación de empate -->
+    <div id="empate-overlay" class="empate-overlay">
+        <canvas id="monedas-canvas"></canvas>
+        <div class="empate-container">
+            <div class="icono-empate">🤝</div>
+            <div class="mensaje-empate">¡EMPATE!</div>
+            <div class="submensaje-empate">Reparto de dinero</div>
+            <div class="monedas-emojis">
+                <span class="moneda-emoji">💰</span>
+                <span class="moneda-emoji">💰</span>
+                <span class="moneda-emoji">💰</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Audio -->
     <audio id="audio-victoria" preload="auto">
         <source src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3" type="audio/mpeg">
     </audio>
     <audio id="audio-derrota" preload="auto">
         <source src="https://assets.mixkit.co/active_storage/sfx/2001/2001-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-empate" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3" type="audio/mpeg">
     </audio>
     
     <div class="row mt-2">

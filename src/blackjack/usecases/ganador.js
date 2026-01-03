@@ -1,6 +1,7 @@
-import { crearConfetti } from './confetti.js';
+import { crearConfetti, crearLluviaMonedas } from './confetti.js';
 
 let stopConfetti = null;
+let stopMonedas = null;
 
 // Función para mostrar la animación de victoria
 const mostrarVictoria = () => {
@@ -55,6 +56,35 @@ const mostrarDerrota = () => {
     }
 };
 
+// Función para mostrar la animación de empate
+const mostrarEmpate = () => {
+    const overlay = document.querySelector('#empate-overlay');
+    const audioEmpate = document.querySelector('#audio-empate');
+    
+    if (overlay) {
+        overlay.classList.add('show');
+        stopMonedas = crearLluviaMonedas();
+        
+        // Reproducir sonido de empate
+        if (audioEmpate) {
+            audioEmpate.volume = 0.4;
+            audioEmpate.play().catch(e => console.log('Error reproduciendo audio:', e));
+        }
+        
+        setTimeout(() => {
+            overlay.classList.remove('show');
+            if (stopMonedas) {
+                stopMonedas();
+                stopMonedas = null;
+            }
+            if (audioEmpate) {
+                audioEmpate.pause();
+                audioEmpate.currentTime = 0;
+            }
+        }, 4500);
+    }
+};
+
 // Función que determina el ganador
 const determinarGanador = (jugadores) => {
     const computadora = jugadores[1];
@@ -86,8 +116,10 @@ const determinarGanador = (jugadores) => {
         mostrarVictoria();
     } else if (jugadorPierde) {
         mostrarDerrota();
+    } else {
+        // Mostrar animación de empate
+        mostrarEmpate();
     }
-    // En caso de empate, solo se muestra en consola
 };
 
 export { determinarGanador };
