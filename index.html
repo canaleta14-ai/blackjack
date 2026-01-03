@@ -16,6 +16,43 @@
     <header class="titulo">     
         <h1 class="text-center">Blackjack</h1>
     </header>
+    
+    <!-- Animación de victoria -->
+    <div id="victoria-overlay" class="victoria-overlay">
+        <canvas id="confetti-canvas"></canvas>
+        <div class="victoria-container">
+            <div class="trofeo">🏆</div>
+            <div class="mensaje-victoria">¡VICTORIA!</div>
+            <div class="estrellas">
+                <span class="estrella">⭐</span>
+                <span class="estrella">⭐</span>
+                <span class="estrella">⭐</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animación de derrota -->
+    <div id="derrota-overlay" class="derrota-overlay">
+        <div class="derrota-container">
+            <div class="cara-triste">😢</div>
+            <div class="mensaje-derrota">Has perdido</div>
+            <div class="lluvia-container">
+                <span class="gota">💧</span>
+                <span class="gota">💧</span>
+                <span class="gota">💧</span>
+                <span class="gota">💧</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="audio-victoria" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-derrota" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2001/2001-preview.mp3" type="audio/mpeg">
+    </audio>
+    
     <div class="row mt-2">
         <div id="botones" class="col-12 text-center">
             <button id="btnNuevo" class="btn btn-primary btn-sm">Nuevo Juego</button>
