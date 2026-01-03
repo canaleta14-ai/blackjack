@@ -306,131 +306,182 @@ body {
     text-align: center;
 }
 
-.duende-container {
+.explosion-container {
     position: relative;
     display: inline-block;
+    height: clamp(200px, 30vw, 300px);
+    width: clamp(200px, 30vw, 300px);
 }
 
-.duende-enojado {
-    font-size: clamp(120px, 24vw, 220px);
-    animation: duendeEntrada 1s ease-out, enrojecer 2s ease-in-out 1s infinite, temblor 0.15s linear 1s infinite;
-    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
-    display: inline-block;
+.bomba {
+    font-size: clamp(80px, 16vw, 150px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: bombaTemblor 0.1s linear 0s 8, bombaDesaparecer 0.2s ease-out 0.8s forwards;
 }
 
-@keyframes duendeEntrada {
+@keyframes bombaTemblor {
+    0%, 100% { transform: translate(-50%, -50%) rotate(-5deg); }
+    50% { transform: translate(-50%, -50%) rotate(5deg); }
+}
+
+@keyframes bombaDesaparecer {
     0% {
-        transform: scale(0) rotate(-180deg);
-        opacity: 0;
-    }
-    60% {
-        transform: scale(1.15) rotate(10deg);
-    }
-    100% {
-        transform: scale(1) rotate(0deg);
+        transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
 }
 
-@keyframes enrojecer {
-    0%, 100% {
-        filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5)) hue-rotate(0deg);
+.explosion {
+    font-size: clamp(150px, 30vw, 280px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    animation: explosionAparece 0.3s ease-out 0.8s forwards, explosionPulsa 0.5s ease-in-out 1.1s infinite;
+    filter: drop-shadow(0 0 30px rgba(255, 100, 0, 0.8));
+}
+
+@keyframes explosionAparece {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
     }
     50% {
-        filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.9)) hue-rotate(0deg) brightness(1.3);
-    }
-}
-
-@keyframes temblor {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(-2px, -1px) rotate(-1deg); }
-    50% { transform: translate(2px, 1px) rotate(1deg); }
-    75% { transform: translate(-1px, 2px) rotate(-0.5deg); }
-}
-
-.orejas-container {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(200px, 40vw, 350px);
-    display: flex;
-    justify-content: space-between;
-    pointer-events: none;
-}
-
-.oreja {
-    font-size: clamp(40px, 8vw, 70px);
-    animation: orejasPunta 0.5s ease-out 0.8s backwards, orejaTemblor 0.2s linear 1.3s infinite;
-}
-
-.oreja-izq {
-    transform: rotate(45deg) scaleX(-1);
-}
-
-.oreja-der {
-    transform: rotate(-45deg);
-}
-
-@keyframes orejasPunta {
-    0% {
-        transform: rotate(0deg) scale(0.5);
-        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 1;
     }
     100% {
+        transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
 }
 
-@keyframes orejaTemblor {
-    0%, 100% { transform: rotate(45deg) scaleY(1); }
-    50% { transform: rotate(45deg) scaleY(1.1); }
+@keyframes explosionPulsa {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
 }
 
-.humo {
+.fuego {
     position: absolute;
-    top: 25%;
-    font-size: clamp(30px, 6vw, 50px);
-    animation: humoSalir 1.5s ease-out 1.2s infinite;
+    font-size: clamp(40px, 8vw, 70px);
     opacity: 0;
+    animation: fuegoVuela 1.5s ease-out 0.9s forwards;
 }
 
-.humo-izq {
-    left: -15%;
-    animation-delay: 1.2s;
+.fuego-1 {
+    top: 10%;
+    left: 50%;
+    animation-delay: 0.85s;
 }
 
-.humo-der {
-    right: -15%;
-    animation-delay: 1.4s;
+.fuego-2 {
+    top: 50%;
+    left: 10%;
+    animation-delay: 0.9s;
 }
 
-@keyframes humoSalir {
+.fuego-3 {
+    top: 50%;
+    right: 10%;
+    animation-delay: 0.95s;
+}
+
+@keyframes fuegoVuela {
     0% {
-        transform: translateY(0) scale(0.5);
+        transform: translate(0, 0) scale(0) rotate(0deg);
         opacity: 0;
     }
     20% {
         opacity: 1;
     }
     100% {
-        transform: translateY(-80px) translateX(20px) scale(1.5);
+        transform: translate(var(--tx, 0), var(--ty, -100px)) scale(1.5) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.fuego-1 { --tx: 0; --ty: -120px; }
+.fuego-2 { --tx: -100px; --ty: -50px; }
+.fuego-3 { --tx: 100px; --ty: -50px; }
+
+.chispa {
+    position: absolute;
+    font-size: clamp(20px, 4vw, 35px);
+    opacity: 0;
+    animation: chispaDispara 1.2s ease-out forwards;
+}
+
+.chispa-1 {
+    top: 30%;
+    left: 20%;
+    animation-delay: 0.85s;
+    --ctx: -80px;
+    --cty: -80px;
+}
+
+.chispa-2 {
+    top: 30%;
+    right: 20%;
+    animation-delay: 0.9s;
+    --ctx: 80px;
+    --cty: -90px;
+}
+
+.chispa-3 {
+    bottom: 30%;
+    left: 25%;
+    animation-delay: 0.95s;
+    --ctx: -70px;
+    --cty: 70px;
+}
+
+.chispa-4 {
+    bottom: 30%;
+    right: 25%;
+    animation-delay: 1s;
+    --ctx: 70px;
+    --cty: 80px;
+}
+
+@keyframes chispaDispara {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--ctx), var(--cty)) rotate(720deg);
         opacity: 0;
     }
 }
 
 .mensaje-derrota {
     margin-top: 40px;
-    font-size: clamp(30px, 6vw, 50px);
+    font-size: clamp(35px, 7vw, 55px);
     font-weight: bold;
-    color: #FF6B6B;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    animation: slideIn 0.5s ease-out 0.5s backwards, parpadeo 1s ease-in-out 1.5s infinite;
+    color: #FF4444;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 100, 0, 0.6);
+    animation: slideIn 0.5s ease-out 1.3s backwards, sacudida 0.15s linear 1.8s infinite;
 }
 
-@keyframes parpadeo {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
+@keyframes sacudida {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
 }
 
 @keyframes caer {
