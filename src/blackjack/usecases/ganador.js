@@ -84,17 +84,10 @@ const determinarGanador = (jugadores) => {
     // Mostrar animación según el resultado
     if (jugadorGana) {
         mostrarVictoria();
-        setTimeout(() => {
-            alert(mensaje);
-        }, 1000);
     } else if (jugadorPierde) {
         mostrarDerrota();
-        setTimeout(() => {
-            alert(mensaje);
-        }, 1000);
-    } else {
-        alert(mensaje);
     }
+    // En caso de empate, solo se muestra en consola
 };
 
 export { determinarGanador };
