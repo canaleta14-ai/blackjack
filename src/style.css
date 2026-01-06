@@ -176,52 +176,20 @@ body {
     animation: fadeIn 0.5s ease-in;
 }
 
-#confetti-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
 .victoria-container {
     position: relative;
     text-align: center;
     z-index: 10000;
 }
 
-.trofeo {
-    font-size: clamp(100px, 20vw, 200px);
-    animation: trofeoEntrada 1s ease-out, bounce 1.5s infinite ease-in-out 1s;
-}
-
-@keyframes trofeoEntrada {
-    0% {
-        transform: scale(0) rotate(-180deg);
-        opacity: 0;
-    }
-    50% {
-        transform: scale(1.2) rotate(10deg);
-    }
-    100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-    }
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-20px) scale(1.1); }
-}
-
-.mensaje-victoria {
-    margin-top: 20px;
-    font-size: clamp(40px, 8vw, 70px);
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-    animation: slideIn 0.5s ease-out 0.3s backwards, pulse 1s infinite 1.3s;
+.mensaje-blackjack {
+    margin-top: 15px;
+    font-size: clamp(35px, 7vw, 60px);
+    font-weight: 900;
+    color: #FFD700;
+    text-shadow: 3px 3px 8px rgba(255, 100, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+    letter-spacing: 3px;
+    animation: slideIn 0.5s ease-out 0.6s backwards, pulseBlackjack 0.8s ease-in-out infinite 1s;
 }
 
 @keyframes slideIn {
@@ -235,46 +203,40 @@ body {
     }
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.estrellas {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.mensaje-blackjack {
+    margin-top: 0px;
+    font-size: clamp(35px, 7vw, 60px);
+    font-weight: 900;
+    color: #FFD700;
+    text-shadow: 3px 3px 8px rgba(255, 100, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+    letter-spacing: 3px;
+    animation: slideIn 0.5s ease-out 0.6s backwards, pulseBlackjack 0.8s ease-in-out infinite 1s;
 }
 
-.estrella {
-    font-size: clamp(40px, 8vw, 60px);
-    display: inline-block;
-    animation: starRotate 2s ease-in-out infinite;
+/* Animación de cascada de cartas */
+.cartas-cascada-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
 }
 
-.estrella:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.estrella:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.estrella:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes starRotate {
-    0%, 100% {
-        transform: rotate(0deg) scale(1);
-    }
-    25% {
-        transform: rotate(-15deg) scale(1.2);
-    }
-    75% {
-        transform: rotate(15deg) scale(1.2);
-    }
+.carta-cascada {
+    position: absolute;
+    width: 80px;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* Animación de derrota */
@@ -499,6 +461,53 @@ body {
         transform: translateY(400px);
         opacity: 0;
     }
+}
+
+@keyframes caerRotar {
+    0% {
+        transform: translateY(-100px) translateX(0) rotateZ(0deg) rotateX(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(500px) translateX(var(--tx, 0)) rotateZ(var(--rz, 360deg)) rotateX(360deg);
+        opacity: 0;
+    }
+}
+
+.carta-cascada.fall-1 {
+    animation: caerRotar 2s ease-in forwards;
+    --tx: -100px;
+    --rz: 360deg;
+}
+
+.carta-cascada.fall-2 {
+    animation: caerRotar 2.2s ease-in forwards 0.1s;
+    --tx: 50px;
+    --rz: -360deg;
+}
+
+.carta-cascada.fall-3 {
+    animation: caerRotar 2.4s ease-in forwards 0.2s;
+    --tx: 100px;
+    --rz: 720deg;
+}
+
+.carta-cascada.fall-4 {
+    animation: caerRotar 2.3s ease-in forwards 0.15s;
+    --tx: -50px;
+    --rz: -540deg;
+}
+
+.carta-cascada.fall-5 {
+    animation: caerRotar 2.5s ease-in forwards 0.25s;
+    --tx: 75px;
+    --rz: 540deg;
 }
 /* Animación de empate */
 .empate-overlay {

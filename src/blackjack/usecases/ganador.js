@@ -1,7 +1,34 @@
 import { crearConfetti, crearLluviaMonedas } from './confetti.js';
 
-let stopConfetti = null;
 let stopMonedas = null;
+
+// Función para crear la cascada de cartas
+const crearCascadaCartas = () => {
+    const container = document.querySelector('#cartas-cascada-container');
+    if (!container) return;
+    
+    container.innerHTML = ''; // Limpiar cartas previas
+    
+    const palos = ['C', 'D', 'H', 'S']; // Corazones, Diamantes, Picas, Tréboles
+    const valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    
+    // Crear 5 cartas cayendo
+    const cantidadCartas = 5;
+    
+    for (let i = 0; i < cantidadCartas; i++) {
+        const palo = palos[Math.floor(Math.random() * palos.length)];
+        const valor = valores[Math.floor(Math.random() * valores.length)];
+        const carta = `${valor}${palo}`;
+        
+        const cartaElement = document.createElement('div');
+        cartaElement.className = `carta-cascada fall-${i + 1}`;
+        cartaElement.style.backgroundImage = `url('assets/cartas/${carta}.png')`;
+        cartaElement.style.left = Math.random() * 80 + 10 + '%';
+        cartaElement.style.top = Math.random() * -50 - 50 + 'px';
+        
+        container.appendChild(cartaElement);
+    }
+};
 
 // Función para mostrar la animación de victoria
 const mostrarVictoria = () => {
@@ -10,7 +37,7 @@ const mostrarVictoria = () => {
     
     if (overlay) {
         overlay.classList.add('show');
-        stopConfetti = crearConfetti();
+        crearCascadaCartas(); // Crear cascada de cartas
         
         // Reproducir sonido de victoria
         if (audioVictoria) {
@@ -20,10 +47,6 @@ const mostrarVictoria = () => {
         
         setTimeout(() => {
             overlay.classList.remove('show');
-            if (stopConfetti) {
-                stopConfetti();
-                stopConfetti = null;
-            }
             if (audioVictoria) {
                 audioVictoria.pause();
                 audioVictoria.currentTime = 0;

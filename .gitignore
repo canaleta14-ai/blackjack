@@ -26,3 +26,6 @@ dist-ssr
 # Android signing keys
 android/*.jks
 android/*.keystore
+
+# Local Netlify folder
+.netlify
