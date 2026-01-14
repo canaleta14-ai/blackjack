@@ -1,4 +1,5 @@
 import { crearConfetti, crearLluviaMonedas } from './confetti.js';
+import { inicializarJuego } from './inicializar-juego.js';
 
 let stopMonedas = null;
 
@@ -51,6 +52,7 @@ const mostrarVictoria = () => {
                 audioVictoria.pause();
                 audioVictoria.currentTime = 0;
             }
+            reiniciarJuegoAutomatico();
         }, 5000);
     }
 };
@@ -75,6 +77,7 @@ const mostrarDerrota = () => {
                 audioDerrota.pause();
                 audioDerrota.currentTime = 0;
             }
+            reiniciarJuegoAutomatico();
         }, 4000);
     }
 };
@@ -104,8 +107,22 @@ const mostrarEmpate = () => {
                 audioEmpate.pause();
                 audioEmpate.currentTime = 0;
             }
+            reiniciarJuegoAutomatico();
         }, 4500);
     }
+};
+
+// Función para reiniciar el juego automáticamente
+const reiniciarJuegoAutomatico = () => {
+    const btnNuevo = document.querySelector('#btnNuevo');
+    const botones = {
+        nuevo: btnNuevo,
+        pedir: document.querySelector('#btnPedir'),
+        detener: document.querySelector('#btnDetener')
+    };
+    
+    // Inicializar un nuevo juego
+    inicializarJuego(botones);
 };
 
 // Función que determina el ganador
